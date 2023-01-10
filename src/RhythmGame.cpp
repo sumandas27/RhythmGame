@@ -11,10 +11,8 @@ void RhythmGame::game_loop() {
 
     while (true) {
         while (SDL_PollEvent(&e))
-            if (e.type == SDL_QUIT) {
-                std::cout << "yo\n";
+            if (e.type == SDL_QUIT)
                 return;
-            }
 
         high_resolution_clock::time_point newTime = high_resolution_clock::now();
         high_resolution_clock::duration frameTime = newTime - currentTime;
@@ -24,7 +22,7 @@ void RhythmGame::game_loop() {
         //std::cout << dt << " ms\n";
 
         SDL_RenderClear(ge.renderer);
-        //currentScene.render();
+        SDL_RenderCopyEx(ge.renderer, ge.textures[t_PiggyBank], NULL, RectAddress{100, 100, 100, 100}, 0.0, NULL, SDL_FLIP_HORIZONTAL);
         SDL_RenderPresent(ge.renderer);
     }
 }

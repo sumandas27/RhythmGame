@@ -39,7 +39,7 @@ GraphicsEngine::~GraphicsEngine() {
 
 void GraphicsEngine::load_media() {
     textures.fill(nullptr);
-    
+    textures[t_PiggyBank] = load_texture("assets/textures/piggyBank.png");
 
     fonts.fill(nullptr);
 }
@@ -50,4 +50,21 @@ void GraphicsEngine::close_media() {
 
     for (TTF_Font* font : fonts)
         TTF_CloseFont(font);
+}
+
+SDL_Texture* GraphicsEngine::load_texture(const std::string& path) {
+    SDL_Surface* surface = IMG_Load(path.c_str());
+    if (surface == nullptr) {
+        std::string imgErrMsg(IMG_GetError());
+        throw std::invalid_argument("Cannot load surface from " + path + " - " + imgErrMsg);
+    }
+
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    if (texture == nullptr) {
+        std::string sdlErrMsg(SDL_GetError());
+        throw std::invalid_argument("Cannot create texture from " + path + " - " + sdlErrMsg);
+    }
+
+    SDL_FreeSurface(surface);
+    return texture;
 }

@@ -10,5 +10,5 @@ game:
 
 cloc:
 	git clone --depth 1 https://github.com/sumandas27/RhythmGame.git
-	cloc RayTracer --fullpath --not-match-f="(Makefile)" --exclude-ext=json,plist
-	rm -rf RayTracer
+	cloc RhythmGame --fullpath --not-match-f="(Makefile)" --exclude-ext=json,plist
+	rm -rf RhythmGame
