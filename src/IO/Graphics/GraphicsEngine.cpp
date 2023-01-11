@@ -1,7 +1,7 @@
 #include "GraphicsEngine.hpp"
 
-const int GraphicsEngine::INIT_SCREEN_W = 800;
-const int GraphicsEngine::INIT_SCREEN_H = 450;
+const int GraphicsEngine::SCREEN_W = 800;
+const int GraphicsEngine::SCREEN_H = 450;
 
 GraphicsEngine::GraphicsEngine() {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -14,7 +14,7 @@ GraphicsEngine::GraphicsEngine() {
         throw std::ios_base::failure("Unable to initialize TTF - " + ttfErrMsg);
     }
 
-    window = SDL_CreateWindow("Rhythm Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, INIT_SCREEN_W, INIT_SCREEN_H, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Rhythm Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_W, SCREEN_H, SDL_WINDOW_SHOWN);
     if (window == nullptr) {
         std::string sdlErrMsg(SDL_GetError());
         throw std::ios_base::failure("Unable to create SDL Window - " + sdlErrMsg);

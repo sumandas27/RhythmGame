@@ -1,6 +1,8 @@
 #pragma once
+#include <memory>
 #include "IO/Graphics/GraphicsEngine.hpp"
 #include "IO/Audio/AudioEngine.hpp"
+#include "Scenes/LevelScene/LevelScene.hpp"
 
 class RhythmGame {
 public:

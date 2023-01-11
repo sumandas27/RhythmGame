@@ -1,9 +1,12 @@
 #include "UI.hpp"
 
+UIInfo::UIInfo() : texture(nullptr), src(UI::NULL_RECT), dst(UI::NULL_RECT), scale(1.0f), flip(SDL_FLIP_NONE), isCentered(false), color(UI::WHITE), rotCenter(UI::NULL_POINT), angle(0.0) { }
+
 UIInfo::UIInfo(SDL_Texture* _texture, const SDL_Rect& _src, const SDL_Rect& _dst, SDL_RendererFlip _flip, float _scale, bool _isCentered, const SDL_Color& _color, const SDL_Point& _rotCenter, double _angle)
   : texture(_texture), src(_src), dst(_dst), flip(_flip), scale(_scale), isCentered(_isCentered), color(_color), rotCenter(_rotCenter), angle(_angle) { }
 
 const SDL_Rect UI::NULL_RECT = { 0, 0, 0, 0 };
+const SDL_Color UI::WHITE = { 255, 255, 255, 255 };
 const SDL_Point UI::NULL_POINT = { 0, 0 };
 
 UI::UI(GraphicsEngine& _ge, AudioEngine& _ae, const UIInfo& _info)
@@ -26,9 +29,8 @@ void UI::render() {
     const SDL_Point* rotCenAddress = is_null(info.rotCenter) ? NULL : &info.rotCenter;
     SDL_RenderCopyEx(ge.renderer, info.texture, srcAddress, dstAddress, info.angle, rotCenAddress, info.flip);
 
-    static constexpr SDL_Color DEFAULT = { 255, 255, 255, 255 };
-    SDL_SetTextureColorMod(info.texture, DEFAULT.r, DEFAULT.g, DEFAULT.b);
-    SDL_SetTextureAlphaMod(info.texture, DEFAULT.a);
+    SDL_SetTextureColorMod(info.texture, WHITE.r, WHITE.g, WHITE.b);
+    SDL_SetTextureAlphaMod(info.texture, WHITE.a);
 }
 
 bool UI::is_null(const SDL_Rect& rect) {

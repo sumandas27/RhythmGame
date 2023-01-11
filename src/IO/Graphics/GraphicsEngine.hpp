@@ -13,6 +13,9 @@ public:
     GraphicsEngine();
     ~GraphicsEngine();
 
+    static const int SCREEN_W;
+    static const int SCREEN_H;
+
     SDL_Window* window;
     SDL_Renderer* renderer;
 
@@ -23,9 +26,6 @@ public:
     std::array<TTF_Font*, MAX_FONTS> fonts;
 
 private:
-    static const int INIT_SCREEN_W;
-    static const int INIT_SCREEN_H;
-
     void load_media();
     void close_media();
 

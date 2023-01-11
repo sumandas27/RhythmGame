@@ -1,6 +1,6 @@
-#include "VariableText.hpp"
+#include "Text.hpp"
 
-VariableText::VariableText(GraphicsEngine& _ge, AudioEngine& _ae, const std::string& _text, const UIInfo& _info) 
+Text::Text(GraphicsEngine& _ge, AudioEngine& _ae, const std::string& _text, const UIInfo& _info) 
     : UI(_ge, _ae, _info), text(_text), oldText(_text)
 {
     SDL_Surface* strSurface = TTF_RenderText_Blended(ge.fonts[f_Game], _text.c_str(), info.color);
@@ -19,15 +19,17 @@ VariableText::VariableText(GraphicsEngine& _ge, AudioEngine& _ae, const std::str
     info.dst.h = strSurface->h;
 }
 
-VariableText::~VariableText() {
+Text::~Text() {
     SDL_DestroyTexture(info.texture);
 }
 
-void VariableText::update() {
+void Text::update() {
     if (text == oldText)
         return;
 
     oldText = text;
+    SDL_DestroyTexture(info.texture);
+
     SDL_Surface* strSurface = TTF_RenderText_Blended(ge.fonts[f_Game], text.c_str(), info.color);
     if (strSurface == nullptr) {
         std::string sdlErrMsg(SDL_GetError());
