@@ -30,7 +30,10 @@ private:
     void close_media();
 
     SDL_Texture* load_texture(const std::string& path);
-    //TODO: Font
+    TTF_Font* load_font(const std::string& path);
+
+    bool is_null(const SDL_Rect& rect);
+    bool is_null(const SDL_Point& point);
 };
 
 enum Texture : size_t {
@@ -39,13 +42,4 @@ enum Texture : size_t {
 
 enum Font : size_t {
     f_Game = 0
-};
-
-struct RectAddress {
-public:
-    RectAddress(int x, int y, int w, int h) : rect{x, y, w, h} { }
-    operator SDL_Rect* () { return &rect; }
-
-private:
-    SDL_Rect rect;
 };

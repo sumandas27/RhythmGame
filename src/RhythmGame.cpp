@@ -1,5 +1,6 @@
 #include <chrono>
 #include "RhythmGame.hpp"
+#include "UI/Text/ConstantText/ConstantText.hpp"
 
 RhythmGame::RhythmGame() : ge(), ae() { }
 
@@ -8,6 +9,8 @@ void RhythmGame::game_loop() {
 
     using namespace std::chrono;
     high_resolution_clock::time_point currentTime = high_resolution_clock::now();
+
+    ConstantText test(ge, ae, "yoski", UIInfo(nullptr, UI::NULL_RECT, { 100, 100, 0, 0 }, SDL_FLIP_NONE, 1.0, false, { 255, 255, 255, 255 }, UI::NULL_POINT, 0.0f));
 
     while (true) {
         while (SDL_PollEvent(&e))
@@ -18,11 +21,9 @@ void RhythmGame::game_loop() {
         high_resolution_clock::duration frameTime = newTime - currentTime;
         float dt = duration_cast<milliseconds>(frameTime).count();
         currentTime = newTime;
-        //currentScene.update(dt);
-        //std::cout << dt << " ms\n";
 
         SDL_RenderClear(ge.renderer);
-        SDL_RenderCopyEx(ge.renderer, ge.textures[t_PiggyBank], NULL, RectAddress{100, 100, 100, 100}, 0.0, NULL, SDL_FLIP_HORIZONTAL);
+        test.render();
         SDL_RenderPresent(ge.renderer);
     }
 }

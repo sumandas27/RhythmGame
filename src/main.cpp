@@ -14,5 +14,6 @@ int main(int argc, char* argv[]) {
         return EXIT_FAILURE;
     }
 
+    std::cout << "S∑M∑N";
     return EXIT_SUCCESS;
 }

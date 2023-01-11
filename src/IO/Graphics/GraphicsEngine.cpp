@@ -42,6 +42,7 @@ void GraphicsEngine::load_media() {
     textures[t_PiggyBank] = load_texture("assets/textures/piggyBank.png");
 
     fonts.fill(nullptr);
+    fonts[f_Game] = load_font("assets/fonts/FFFFORWA.TTF");
 }
 
 void GraphicsEngine::close_media() {
@@ -67,4 +68,21 @@ SDL_Texture* GraphicsEngine::load_texture(const std::string& path) {
 
     SDL_FreeSurface(surface);
     return texture;
+}
+
+TTF_Font* GraphicsEngine::load_font(const std::string& path) {
+    TTF_Font* font = TTF_OpenFont(path.c_str(), 72);
+    if (font == nullptr) {
+        std::string ttfErrMsg(TTF_GetError());
+        throw std::ios_base::failure("Cannot create font from " + path + " - " + ttfErrMsg);
+    }
+    return font;
+}
+
+bool GraphicsEngine::is_null(const SDL_Rect& rect) {
+    return rect.x == 0 && rect.y == 0 && rect.w == 0 && rect.h == 0;
+}
+
+bool GraphicsEngine::is_null(const SDL_Point& point) {
+    return point.x == 0 && point.y == 0;
 }
